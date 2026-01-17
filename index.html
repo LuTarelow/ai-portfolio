@@ -1,1757 +1,460 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luis Augusto Aragão - AI Engineer especializado em sistemas aplicados de IA em produção">
-    <title>Luis Augusto Aragão | AI Engineer - Applied AI Systems</title>
-    <style>
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* RESET & VARIABLES */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            /* Dark Theme (Default) */
-            --bg-primary: #0a0e14;
-            --bg-secondary: #131920;
-            --bg-tertiary: #1a2332;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
-            --text-muted: #6e7681;
-            --accent-primary: #0ea5e9;
-            --accent-secondary: #06b6d4;
-            --accent-tertiary: #8b5cf6;
-            --border-color: #30363d;
-            --shadow-sm: rgba(0, 0, 0, 0.3);
-            --shadow-md: rgba(0, 0, 0, 0.5);
-            --shadow-lg: rgba(0, 0, 0, 0.7);
-            --gradient-accent: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-            --gradient-dark: linear-gradient(135deg, #1a2332 0%, #0a0e14 100%);
-        }
-        
-        [data-theme="light"] {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f6f8fa;
-            --bg-tertiary: #eef2f6;
-            --text-primary: #0d1117;
-            --text-secondary: #57606a;
-            --text-muted: #8b949e;
-            --accent-primary: #0969da;
-            --accent-secondary: #0550ae;
-            --accent-tertiary: #8250df;
-            --border-color: #d0d7de;
-            --shadow-sm: rgba(0, 0, 0, 0.04);
-            --shadow-md: rgba(0, 0, 0, 0.08);
-            --shadow-lg: rgba(0, 0, 0, 0.12);
-            --gradient-accent: linear-gradient(135deg, #0969da 0%, #0550ae 100%);
-            --gradient-dark: linear-gradient(135deg, #eef2f6 0%, #f6f8fa 100%);
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* TYPOGRAPHY */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
-        
-        body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-weight: 400;
-            line-height: 1.2;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* LAYOUT UTILITIES */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        section {
-            padding: 6rem 0;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        section:nth-child(even) {
-            background-color: var(--bg-secondary);
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* HEADER & NAVIGATION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 14, 20, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        [data-theme="light"] header {
-            background: rgba(255, 255, 255, 0.85);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-        }
-        
-        .theme-toggle {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        
-        .theme-toggle:hover {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* HERO SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .hero {
-            padding: 10rem 0 8rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-30px, 30px) rotate(180deg); }
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 1rem;
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
-        }
-        
-        .hero-title {
-            font-size: clamp(1.25rem, 3vw, 1.75rem);
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 500;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-            opacity: 0;
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-muted);
-            max-width: 700px;
-            margin-bottom: 3rem;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-            opacity: 0;
-        }
-        
-        .impact-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-        
-        .impact-card {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-        }
-        
-        .impact-card:nth-child(1) { animation-delay: 0.8s; }
-        .impact-card:nth-child(2) { animation-delay: 1s; }
-        .impact-card:nth-child(3) { animation-delay: 1.2s; }
-        
-        .impact-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 30px var(--shadow-md);
-        }
-        
-        .impact-card h3 {
-            font-size: 1.125rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-        }
-        
-        .impact-card p {
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 1.4s forwards;
-            opacity: 0;
-        }
-        
-        .btn {
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: var(--gradient-accent);
-            color: white;
-            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
-        }
-        
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--bg-primary);
-            border-color: var(--accent-primary);
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* SECTION HEADERS */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-header h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1rem;
-        }
-        
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* ABOUT SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .about-content p {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-        
-        .about-content p:first-child {
-            font-size: 1.25rem;
-            color: var(--text-primary);
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* SKILLS SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .skill-tag {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-        
-        .skill-tag:hover {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-            transform: translateY(-2px);
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* CASES SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .cases-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .case-card {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .case-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .case-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .case-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px var(--shadow-md);
-            border-color: var(--accent-primary);
-        }
-        
-        .case-status {
-            display: inline-block;
-            padding: 0.375rem 0.875rem;
-            border-radius: 20px;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
-        .status-production {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.2);
-        }
-        
-        .status-pilot {
-            background: rgba(251, 191, 36, 0.1);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.2);
-        }
-        
-        .status-scalable {
-            background: rgba(14, 165, 233, 0.1);
-            color: #0ea5e9;
-            border: 1px solid rgba(14, 165, 233, 0.2);
-        }
-        
-        .case-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
-        
-        .case-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        
-        .case-impact {
-            font-size: 0.9375rem;
-            color: var(--accent-primary);
-            font-weight: 600;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1rem;
-            margin-top: 1rem;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* VIDEO DEMONSTRATIONS SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .demos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .demo-card {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .demo-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .demo-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .demo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px var(--shadow-md);
-            border-color: var(--accent-primary);
-        }
-        
-        .demo-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-        
-        .demo-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-        }
-        
-        .demo-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .demo-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .demo-tag {
-            background: rgba(14, 165, 233, 0.1);
-            color: var(--accent-primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid rgba(14, 165, 233, 0.2);
-        }
-        
-        .play-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            color: var(--accent-primary);
-            font-weight: 600;
-            font-size: 0.9375rem;
-        }
-        
-        .play-indicator::before {
-            content: '▶';
-            font-size: 0.875rem;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* VIDEO MODAL */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .video-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.94);
-            z-index: 3000;
-            overflow-y: auto;
-            padding: 2rem;
-            animation: fadeIn 0.3s ease;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .video-modal.active {
-            display: flex;
-        }
-        
-        .video-container {
-            position: relative;
-            max-width: 1200px;
-            width: 100%;
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            overflow: hidden;
-            animation: slideUp 0.4s ease;
-            border: 1px solid var(--border-color);
-        }
-        
-        .video-header {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .video-header h3 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-        }
-        
-        .video-close {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.2s ease;
-        }
-        
-        .video-close:hover {
-            background: var(--accent-primary);
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            background: #000;
-        }
-        
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            outline: none;
-        }
-        
-        .sound-notice {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(14, 165, 233, 0.95);
-            color: white;
-            padding: 0.875rem 1.75rem;
-            border-radius: 8px;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            display: none;
-            align-items: center;
-            gap: 0.75rem;
-            z-index: 10;
-            animation: fadeIn 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .sound-notice.show {
-            display: flex;
-        }
-        
-        .sound-notice:hover {
-            background: rgba(14, 165, 233, 1);
-            transform: translateX(-50%) scale(1.05);
-        }
-        
-        .sound-notice::before {
-            content: '🔇';
-            font-size: 1.25rem;
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* CASE MODAL */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 2rem;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal-content {
-            background: var(--bg-secondary);
-            max-width: 900px;
-            margin: 2rem auto;
-            border-radius: 16px;
-            padding: 3rem;
-            position: relative;
-            animation: slideUp 0.4s ease;
-            border: 1px solid var(--border-color);
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.2s ease;
-        }
-        
-        .modal-close:hover {
-            background: var(--accent-primary);
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .modal h2 {
-            font-size: 2.25rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-        
-        .modal h3 {
-            font-size: 1.5rem;
-            margin: 2rem 0 1rem;
-            color: var(--accent-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-        }
-        
-        .modal p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            font-size: 1.0625rem;
-        }
-        
-        .modal ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 1rem 0;
-        }
-        
-        .modal li {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            padding-left: 1.5rem;
-            position: relative;
-            margin-bottom: 0.75rem;
-        }
-        
-        .modal li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-            font-weight: bold;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* PRINCIPLES SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .principle-card {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .principle-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-3px);
-        }
-        
-        .principle-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .principle-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-        }
-        
-        .principle-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* CONTACT SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .contact-form {
-            max-width: 600px;
-            margin: 2rem auto;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.875rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        
-        .contact-cta {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .contact-cta p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-        
-        .success-message {
-            display: none;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* FOOTER */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        footer p {
-            color: var(--text-muted);
-            font-size: 0.9375rem;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* RESPONSIVE */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        @media (max-width: 768px) {
-            section {
-                padding: 4rem 0;
-            }
-            
-            .hero {
-                padding: 8rem 0 6rem;
-            }
-            
-            .impact-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .cases-grid,
-            .demos-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                padding: 2rem;
-                margin: 1rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .video-wrapper {
-                padding-bottom: 75%;
-            }
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* PRINT STYLES */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        @media print {
-            * {
-                background: white !important;
-                color: black !important;
-                box-shadow: none !important;
-                text-shadow: none !important;
-            }
-            
-            header, .theme-toggle, .cta-buttons, .modal, .video-modal, .play-indicator {
-                display: none !important;
-            }
-            
-            section {
-                page-break-inside: avoid;
-            }
-            
-            .case-card, .principle-card, .demo-card {
-                border: 1px solid #ddd !important;
-                page-break-inside: avoid;
-            }
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* SMOOTH SCROLL */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo — Vídeos (Tesouraria, Prospecção, WhatsApp)</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#111827;
+      --panel2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.08);
+      --shadow: 0 30px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 14px;
+      --focus: rgba(99,102,241,.55);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, sans-serif;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(99,102,241,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(16,185,129,.14), transparent 55%),
+        radial-gradient(900px 500px at 55% 95%, rgba(245,158,11,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+    .wrap{
+      width:min(980px, 100%);
+    }
+    header{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      margin-bottom:18px;
+    }
+    .title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.4;
+    }
+    .hint{
+      margin-left:auto;
+      color:var(--muted);
+      font-size:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:10px 12px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+      .hint{display:none}
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      padding:16px;
+      min-height:170px;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+      outline:none;
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .card:focus-visible{
+      box-shadow:0 0 0 4px var(--focus);
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      color:var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      width:fit-content;
+    }
+    .badge .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:rgba(99,102,241,.9);
+      box-shadow:0 0 0 3px rgba(99,102,241,.18);
+    }
+    .badge.green .dot{background:rgba(16,185,129,.95); box-shadow:0 0 0 3px rgba(16,185,129,.18);}
+    .badge.amber .dot{background:rgba(245,158,11,.95); box-shadow:0 0 0 3px rgba(245,158,11,.18);}
+
+    .card h2{
+      margin:12px 0 8px 0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      font-size:11px;
+      color:rgba(229,231,235,.92);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.35);
+    }
+    .kbd{
+      position:absolute;
+      right:14px;
+      bottom:12px;
+      font-size:11px;
+      color:var(--muted);
+      border:1px dashed rgba(255,255,255,.14);
+      padding:6px 9px;
+      border-radius:10px;
+      background:rgba(0,0,0,.12);
+    }
+
+    /* Modal */
+    .backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:50;
+    }
+    .backdrop.show{display:flex;}
+    .modal{
+      width:min(920px, 100%);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(17,24,39,.92), rgba(15,23,42,.92));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .modal header{
+      margin:0;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .modal header .left{
+      display:flex; flex-direction:column; gap:3px;
+    }
+    .modal header .left .t{
+      font-weight:700; letter-spacing:.2px;
+    }
+    .modal header .left .d{
+      color:var(--muted); font-size:12px;
+    }
+    .close{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .close:focus-visible{ box-shadow:0 0 0 4px var(--focus); outline:none; }
+    .player{
+      background:#000;
+      aspect-ratio: 16/9;
+      width:100%;
+    }
+    video{
+      width:100%;
+      height:100%;
+      display:block;
+      background:#000;
+    }
+    .modal footer{
+      padding:12px 16px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .mini{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .link{
+      color:rgba(229,231,235,.92);
+      text-decoration:none;
+      border-bottom:1px dotted rgba(229,231,235,.35);
+    }
+    .link:hover{border-bottom-style:solid}
+
+    /* print */
+    @media print{
+      body{background:#fff;color:#000}
+      .backdrop{display:none !important}
+      .card{break-inside:avoid}
+      .hint{display:none}
+      .kbd{display:none}
+    }
+  </style>
 </head>
 <body>
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- HEADER -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
+  <main class="wrap" aria-label="Demonstrações em vídeo">
     <header>
-        <nav>
-            <div class="logo">Luis Augusto Aragão</div>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
-                <span id="theme-icon">☀️ Light</span>
-            </button>
-        </nav>
+      <div class="title">
+        <h1>Demonstrações (vídeo) — IA aplicada</h1>
+        <p class="sub">Passe o mouse sobre um card para abrir o vídeo em pop-up. No celular, toque no card. Pressione <b>Esc</b> para fechar.</p>
+      </div>
+      <div class="hint" aria-hidden="true">Hover: abre • Clique: fixa • Esc: fecha</div>
     </header>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- HERO SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Luis Augusto Aragão</h1>
-                <p class="hero-title">AI Engineer | Applied AI Systems | Finance, Risk & Decision-Making</p>
-                <p class="hero-subtitle">Desenho e implemento sistemas de IA confiáveis para decisões críticas em escala.</p>
-                
-                <div class="impact-cards">
-                    <div class="impact-card">
-                        <h3>Sistemas Multi-Agent</h3>
-                        <p>Orquestração inteligente de agentes especializados em produção</p>
-                    </div>
-                    <div class="impact-card">
-                        <h3>IA Multimodal</h3>
-                        <p>Processamento de PDF, áudio, texto e WhatsApp</p>
-                    </div>
-                    <div class="impact-card">
-                        <h3>Governança & Controle</h3>
-                        <p>Anti-alucinação, auditabilidade e segurança</p>
-                    </div>
-                </div>
-                
-                <div class="cta-buttons">
-                    <a href="#cases" class="btn btn-primary">Ver Casos Reais</a>
-                    <a href="#contact" class="btn btn-secondary">Contato Executivo</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- ABOUT SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>Visão Executiva</h2>
-            </div>
-            <div class="about-content">
-                <p>Atuo como AI Engineer aplicado, construindo sistemas de inteligência artificial que operam em ambientes de alta responsabilidade onde decisões incorretas geram impacto financeiro e operacional significativo. Minha experiência está concentrada no mercado financeiro, especialmente em corporate banking, onde a precisão e a conformidade são requisitos inegociáveis.</p>
-                
-                <p>Meu foco está na arquitetura de sistemas de IA que combinam modelos de linguagem com regras determinísticas, garantindo confiabilidade, auditabilidade e governança em operações bancárias críticas. Trabalho com IA aplicada a crédito corporativo, análise de risco, tesouraria, gestão de portfólio e processos de relacionamento com grandes clientes, onde cada decisão impacta diretamente os resultados financeiros e a exposição ao risco da instituição. Compreendo profundamente os desafios de compliance, gestão de risco e eficiência operacional que definem o sucesso em corporate banking.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- SKILLS SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section id="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2>Stack Estratégico</h2>
-                <p>Competências-chave em AI Engineering aplicado</p>
-            </div>
-            <div class="skills-grid">
-                <span class="skill-tag">AI Systems Architecture</span>
-                <span class="skill-tag">Multi-Agent Orchestration</span>
-                <span class="skill-tag">RAG & Knowledge-based AI</span>
-                <span class="skill-tag">Python (Production)</span>
-                <span class="skill-tag">LLMs & Prompt Governance</span>
-                <span class="skill-tag">Multimodal AI</span>
-                <span class="skill-tag">Voice AI (Real-time)</span>
-                <span class="skill-tag">APIs & Cloud Deployment</span>
-                <span class="skill-tag">Data Security & Compliance</span>
-                <span class="skill-tag">Observability & Cost Control</span>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- CASES SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section id="cases">
-        <div class="container">
-            <div class="section-header">
-                <h2>Casos Reais de IA</h2>
-                <p>Sistemas aplicados a problemas críticos de corporate banking</p>
-            </div>
-            <div class="cases-grid" id="casesGrid"></div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- VIDEO DEMONSTRATIONS SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section id="demos">
-        <div class="container">
-            <div class="section-header">
-                <h2>Demonstrações em Vídeo</h2>
-                <p>Sistemas em Execução</p>
-            </div>
-            <div class="demos-grid">
-                <div class="demo-card" onclick="openVideoModal('tesouraria')">
-                    <span class="demo-icon">💹</span>
-                    <h3>Tesouraria — Terminal</h3>
-                    <p>Sistema de suporte a decisões financeiras via interface de terminal. Análise de cenários, simulações e recomendações baseadas em dados de mercado em tempo real.</p>
-                    <div class="demo-tags">
-                        <span class="demo-tag">Cloud</span>
-                        <span class="demo-tag">Decision Support</span>
-                        <span class="demo-tag">Governança</span>
-                    </div>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-                
-                <div class="demo-card" onclick="openVideoModal('prospeccao')">
-                    <span class="demo-icon">🔍</span>
-                    <h3>Prospecção — Chat Q&A</h3>
-                    <p>Sistema RAG para consulta confiável a base de conhecimento proprietária. Respostas precisas com citação de fonte, sem extrapolação ou alucinação.</p>
-                    <div class="demo-tags">
-                        <span class="demo-tag">RAG</span>
-                        <span class="demo-tag">Knowledge Base</span>
-                        <span class="demo-tag">Governança</span>
-                    </div>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-                
-                <div class="demo-card" onclick="openVideoModal('whatsapp')">
-                    <span class="demo-icon">💬</span>
-                    <h3>WhatsApp — Multi-agent</h3>
-                    <p>Orquestração multi-agent via WhatsApp para análise de crédito. Processamento multimodal com governança e regras não negociáveis.</p>
-                    <div class="demo-tags">
-                        <span class="demo-tag">Multi-agent</span>
-                        <span class="demo-tag">Multimodal</span>
-                        <span class="demo-tag">WhatsApp</span>
-                    </div>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-                
-                <div class="demo-card" onclick="openVideoModal('voice')">
-                    <span class="demo-icon">📞</span>
-                    <h3>Voice AI — URA Inteligente</h3>
-                    <p>Sistema de URA inteligente para atendimento telefônico. Conversação natural, compreensão de contexto e resolução de solicitações complexas via voz.</p>
-                    <div class="demo-tags">
-                        <span class="demo-tag">Voice AI</span>
-                        <span class="demo-tag">Real-time</span>
-                        <span class="demo-tag">Telephony</span>
-                    </div>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- PRINCIPLES SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section id="principles">
-        <div class="container">
-            <div class="section-header">
-                <h2>Princípios de Engenharia</h2>
-                <p>Como trabalho com IA em ambientes críticos</p>
-            </div>
-            <div class="principles-grid">
-                <div class="principle-card">
-                    <div class="principle-icon">🏗️</div>
-                    <h3>IA como Sistema</h3>
-                    <p>Não prompts isolados, mas arquiteturas completas com orquestração, memória e controle de estado.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">🎯</div>
-                    <h3>Controle > Criatividade</h3>
-                    <p>Em ambientes críticos, previsibilidade e governança superam experimentação não controlada.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">📊</div>
-                    <h3>Observabilidade</h3>
-                    <p>Sistemas auditáveis com rastreamento completo de decisões, custos e performance.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">💰</div>
-                    <h3>Eficiência Operacional</h3>
-                    <p>Otimização contínua de custo, latência e throughput sem comprometer qualidade.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">🔒</div>
-                    <h3>Segurança</h3>
-                    <p>Proteção de dados sensíveis, conformidade regulatória e gestão de riscos de IA.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">⚖️</div>
-                    <h3>Responsabilidade</h3>
-                    <p>Transparência nas limitações, vieses potenciais e fronteiras de confiabilidade.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- CONTACT SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Contato Executivo</h2>
-                <p>Vamos discutir como IA aplicada pode resolver seus desafios críticos</p>
-            </div>
-            
-            <div class="success-message" id="successMessage">
-                ✓ Mensagem enviada com sucesso (demonstração)
-            </div>
-            
-            <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Nome</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="company">Empresa</label>
-                    <input type="text" id="company">
-                </div>
-                <div class="form-group">
-                    <label for="message">Mensagem</label>
-                    <textarea id="message" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensagem</button>
-            </form>
-            
-            <div class="contact-cta">
-                <p>"Aberto a conversas estratégicas sobre IA aplicada a problemas de negócio complexos"</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- FOOTER -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Luis Augusto Aragão | AI Engineer - Applied AI Systems</p>
-        </div>
-    </footer>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- VIDEO MODAL -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <div class="video-modal" id="videoModal" onclick="closeVideoModal(event)">
-        <div class="video-container" onclick="event.stopPropagation()">
-            <div class="video-header">
-                <h3 id="videoTitle"></h3>
-                <button class="video-close" onclick="closeVideoModal()" aria-label="Fechar vídeo">&times;</button>
-            </div>
-            <div class="video-wrapper">
-                <video id="videoPlayer" controls playsinline preload="metadata"></video>
-                <div class="sound-notice" id="soundNotice" onclick="enableSound()">
-                    Clique aqui para ativar o som
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- CASE MODAL -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <div class="modal" id="caseModal" onclick="closeCaseModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeCaseModal()" aria-label="Fechar modal">&times;</button>
-            <div id="modalBody"></div>
-        </div>
-    </div>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- JAVASCRIPT -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <script>
-        // ═══════════════════════════════════════════════════════════════════
-        // CASES DATA
-        // ═══════════════════════════════════════════════════════════════════
-        
-        const cases = [
-            {
-                title: "Sistema Multi-Agent via WhatsApp",
-                status: "production",
-                context: "Instituição financeira com necessidade de análise de crédito e sensibilidade de carteira através de canal conversacional acessível.",
-                impact: "Análise multimodal com governança em ambiente crítico",
-                solution: {
-                    context: "Operações de crédito e gestão de risco exigem análise rápida de documentos (PDFs, imagens), interação via voz, e respostas consistentes baseadas em políticas internas não negociáveis. A solução precisava operar via WhatsApp para acessibilidade máxima, mantendo segurança e auditabilidade.",
-                    architecture: [
-                        "Orquestração multi-agent com agentes especializados (análise de crédito, sensibilidade, conformidade)",
-                        "Processamento multimodal: PDFs (extratos, balanços), áudio (transcrição automática), imagens (OCR)",
-                        "Stateful conversation: memória de contexto por sessão de usuário",
-                        "Integração WhatsApp Business API com webhook seguro",
-                        "Regras determinísticas combinadas com LLMs para decisões críticas"
-                    ],
-                    governance: [
-                        "Anti-alucinação: validação cruzada de outputs do LLM com regras de negócio",
-                        "Máscaramento automático de dados sensíveis (CPF, valores financeiros) antes do LLM",
-                        "Logs completos de conversação para auditoria regulatória",
-                        "Fallback para revisão humana em casos de incerteza acima do limiar",
-                        "Rate limiting e autenticação por número de telefone autorizado"
-                    ],
-                    results: [
-                        "Tempo de triagem inicial de crédito significativamente reduzido",
-                        "Rastreabilidade completa em decisões para compliance",
-                        "Proteção rigorosa de informações sensíveis em operação",
-                        "Interface acessível via WhatsApp ampliou adesão de analistas"
-                    ]
-                }
-            },
-            {
-                title: "Modelo Python em Cloud para Tesouraria",
-                status: "production",
-                context: "Área de tesouraria corporativa necessitava de suporte técnico para decisões de alocação de recursos e gestão de risco financeiro.",
-                impact: "Decisões financeiras críticas com modelo em produção cloud",
-                solution: {
-                    context: "Decisões de tesouraria envolvem análise de múltiplas variáveis de mercado, simulações de cenários e recomendações baseadas em políticas financeiras complexas. A solução precisava ser confiável, rápida e auditável para uso diário pela diretoria financeira.",
-                    architecture: [
-                        "Modelo Python deployado em cloud (AWS Lambda / GCP Cloud Functions)",
-                        "Pipeline de dados em tempo real com APIs de mercado financeiro",
-                        "Motor de simulação de cenários (Monte Carlo) para análise de risco",
-                        "Interface executiva via API REST com autenticação OAuth2",
-                        "Cache inteligente para otimização de latência e custo"
-                    ],
-                    governance: [
-                        "Versionamento completo de modelos e datasets usados em cada decisão",
-                        "Validação de inputs com schema rigoroso (preços, taxas, volumes)",
-                        "Alertas automáticos para anomalias em dados de entrada ou saídas inesperadas",
-                        "Documentação técnica completa para auditoria interna e externa",
-                        "Testes de stress regulares para garantir performance em condições extremas"
-                    ],
-                    results: [
-                        "Tempo de análise de cenários drasticamente reduzido",
-                        "Alta confiabilidade em operação contínua",
-                        "Economia significativa em custos de oportunidade",
-                        "Adoção pela diretoria financeira como ferramenta estratégica"
-                    ]
-                }
-            },
-            {
-                title: "Agente de Prospecção com RAG Proprietário",
-                status: "scalable",
-                context: "Necessidade de consulta confiável a base de conhecimento proprietária sem risco de alucinação ou extrapolação de informações.",
-                impact: "Consulta segura a conhecimento proprietário sem extrapolação",
-                solution: {
-                    context: "Equipes comerciais e de produto precisavam acessar conhecimento interno (contratos, especificações técnicas, histórico de clientes) de forma conversacional, mas com garantia de que respostas seriam baseadas exclusivamente em documentos autorizados.",
-                    architecture: [
-                        "Sistema RAG (Retrieval-Augmented Generation) com embedding de documentos proprietários",
-                        "Vector database para busca semântica eficiente (Pinecone / Weaviate)",
-                        "LLM instruído a responder APENAS com base em contexto recuperado",
-                        "Pipeline de ingestão de documentos com validação e metadados",
-                        "Interface conversacional com citações automáticas de fonte"
-                    ],
-                    governance: [
-                        "Prompt engineering rigoroso: LLM proibido de gerar informações não presentes no contexto",
-                        "Detecção de perguntas fora do escopo com redirecionamento para especialistas",
-                        "Auditoria de quais documentos foram usados em cada resposta",
-                        "Controle de acesso baseado em permissões de usuário (RBAC)",
-                        "Monitoramento de qualidade das respostas com feedback humano contínuo"
-                    ],
-                    results: [
-                        "Taxa de respostas precisas validadas por especialistas muito elevada",
-                        "Tempo de busca de informações internas substancialmente reduzido",
-                        "Proteção rigorosa de informações confidenciais",
-                        "Escalável para adição de novos documentos sem retreinamento completo"
-                    ]
-                }
-            },
-            {
-                title: "Geração de Relatórios Executivos em HTML",
-                status: "production",
-                context: "Necessidade de transformar dados analíticos complexos em relatórios visuais prontos para apresentação em Comitês Executivos.",
-                impact: "Relatórios executivos automatizados com qualidade de consultoria",
-                solution: {
-                    context: "Comitês executivos exigem relatórios concisos, visualmente claros e focados em insights acionáveis. A criação manual consumia tempo significativo e variava em qualidade dependendo do analista.",
-                    architecture: [
-                        "Pipeline automatizado de ETL para consolidação de dados de múltiplas fontes",
-                        "Template engine para geração de HTML responsivo e PDF de alta qualidade",
-                        "LLM para síntese executiva: transformar dados em narrativa de negócio",
-                        "Geração de gráficos interativos (D3.js / Chart.js)",
-                        "Sistema de aprovação com workflow antes da distribuição final"
-                    ],
-                    governance: [
-                        "Validação cruzada de métricas calculadas com fontes primárias",
-                        "Revisão humana obrigatória de síntese narrativa gerada por IA",
-                        "Versionamento de relatórios com rastreamento de alterações",
-                        "Controle de distribuição: relatórios sensíveis com acesso restrito",
-                        "Logs de quem gerou, aprovou e acessou cada relatório"
-                    ],
-                    results: [
-                        "Tempo de criação de relatório drasticamente reduzido",
-                        "Padronização de qualidade e formato em todos os relatórios",
-                        "Feedback muito positivo de executivos sobre clareza e utilidade",
-                        "Escalado para diferentes tipos de relatórios executivos"
-                    ]
-                }
-            },
-            {
-                title: "Criação de Conteúdo Multimídia via IA",
-                status: "pilot",
-                context: "Necessidade de produzir vídeos institucionais e de comunicação estratégica de forma ágil e escalável.",
-                impact: "Comunicação estratégica automatizada com qualidade profissional",
-                solution: {
-                    context: "Comunicação executiva e marketing institucional demandavam vídeos de alta qualidade, mas produção tradicional era cara e lenta. A solução precisava manter controle editorial e alinhamento com brand guidelines.",
-                    architecture: [
-                        "Pipeline de geração de conteúdo: roteiro (LLM) → voiceover (TTS) → vídeo (AI video tools)",
-                        "LLM para criação de roteiros alinhados com mensagens-chave aprovadas",
-                        "Síntese de voz com vozes customizadas para identidade de marca",
-                        "Integração com ferramentas de edição de vídeo (After Effects via scripting)",
-                        "Sistema de revisão com múltiplas iterações antes da publicação"
-                    ],
-                    governance: [
-                        "Aprovação humana obrigatória de roteiro antes de produção de mídia",
-                        "Validação de conformidade com políticas de comunicação corporativa",
-                        "Detecção de vieses ou linguagem inadequada antes da produção",
-                        "Controle de direitos autorais: uso apenas de assets licenciados",
-                        "Testes com audiências-piloto antes de lançamento amplo"
-                    ],
-                    results: [
-                        "Tempo de produção de vídeo significativamente reduzido",
-                        "Custo de produção substancialmente menor",
-                        "Qualidade percebida mantida ou superior segundo pesquisas internas",
-                        "Vídeos produzidos em piloto com expansão planejada"
-                    ]
-                }
-            },
-            {
-                title: "Voice AI — URA Inteligente para Banking",
-                status: "production",
-                context: "Necessidade de modernizar atendimento telefônico com IA conversacional capaz de resolver solicitações complexas via voz.",
-                impact: "Atendimento telefônico inteligente com compreensão natural",
-                solution: {
-                    context: "Atendimento telefônico tradicional via URA (Unidade de Resposta Audível) é frustrante para clientes e custoso para operação. A solução precisava oferecer conversação natural, compreender contexto e resolver solicitações complexas mantendo segurança e compliance.",
-                    architecture: [
-                        "Integração com plataforma de telefonia (SIP/WebRTC) para recepção de chamadas",
-                        "Speech-to-Text (STT) em tempo real para conversão de fala em texto",
-                        "Motor de IA conversacional com compreensão de intenção e extração de entidades",
-                        "Text-to-Speech (TTS) com voz natural e personalizada",
-                        "Orquestração de fluxos complexos com transferência inteligente para humanos"
-                    ],
-                    governance: [
-                        "Autenticação de usuário via voz (biometria vocal) e validação de dados pessoais",
-                        "Logs completos de chamadas e transcrições para auditoria",
-                        "Detecção de situações de risco ou fraude com escalação automática",
-                        "Compliance com LGPD: gravações com consentimento e armazenamento seguro",
-                        "Fallback inteligente para atendimento humano quando confiança é baixa"
-                    ],
-                    results: [
-                        "Resolução de solicitações complexas sem necessidade de operador humano",
-                        "Experiência do cliente significativamente melhorada",
-                        "Custo operacional de atendimento reduzido",
-                        "Disponibilidade de atendimento expandida para fora do horário comercial"
-                    ]
-                }
-            }
-        ];
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // VIDEO CONFIGURATION (Google Drive Direct Links)
-        // ═══════════════════════════════════════════════════════════════════
-        
-		 const videos = {
-			tesouraria: {
-				title: "Tesouraria — Terminal de Decisão Financeira",
-				src: "assets/tesouraria.mp4"
-			},
-			prospeccao: {
-				title: "Prospecção — Sistema RAG Q&A",
-				src: "assets/prospeccao.mp4"
-			},
-			whatsapp: {
-				title: "WhatsApp — Sistema Multi-Agent",
-				src: "assets/whats.mp4"
-			},
-			voice: {
-				title: "Voice AI — URA Inteligente (Ligação Telefônica)",
-				src: "assets/ura_voice_ai.mp4"
-			}
-		};
 
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // THEME TOGGLE
-        // ═══════════════════════════════════════════════════════════════════
-        
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            const themeIcon = document.getElementById('theme-icon');
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            themeIcon.textContent = newTheme === 'light' ? '🌙 Dark' : '☀️ Light';
+    <section class="grid" aria-label="Lista de demonstrações">
+      <div class="card" tabindex="0"
+           data-title="Terminal de Tesouraria"
+           data-desc="Demo de interface e fluxo de consulta para suporte a decisão em tesouraria."
+           data-src="assets/tesouraria.mp4"
+           data-tags="Cloud, Decision Support, UI"
+           data-badge="green">
+        <div class="badge green"><span class="dot"></span>Produção / Demo</div>
+        <h2>Tesouraria — Terminal interativo</h2>
+        <p>Interface “produto” focada em decisão. Demonstra execução real e leitura rápida pelo decisor.</p>
+        <div class="meta">
+          <span class="pill">Suporte a decisão</span>
+          <span class="pill">Cloud</span>
+          <span class="pill">Execução real</span>
+        </div>
+        <div class="kbd">hover</div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Chatbot de Prospecção"
+           data-desc="Demo rápida de Q&A sobre base proprietária com UX de uso imediato."
+           data-src="assets/prospeccao.mp4"
+           data-tags="RAG, Sales, Knowledge"
+           data-badge="amber">
+        <div class="badge amber"><span class="dot"></span>Piloto / Demo</div>
+        <h2>Prospecção — Q&A com base</h2>
+        <p>Mostra como o usuário pergunta e obtém resposta estruturada de forma prática.</p>
+        <div class="meta">
+          <span class="pill">Base proprietária</span>
+          <span class="pill">Q&A</span>
+          <span class="pill">UX</span>
+        </div>
+        <div class="kbd">hover</div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="WhatsApp — Multi‑agent"
+           data-desc="Demonstra multimodal (PDF/áudio/texto) e resposta estruturada no WhatsApp."
+           data-src="assets/whats.mp4"
+           data-tags="Multimodal, WhatsApp, Orchestration"
+           data-badge="">
+        <div class="badge"><span class="dot"></span>Produção / Demo</div>
+        <h2>WhatsApp — Multi‑agent multimodal</h2>
+        <p>Prova visual do fluxo conversacional e entrega de análise no canal final.</p>
+        <div class="meta">
+          <span class="pill">PDF + Áudio</span>
+          <span class="pill">Orquestração</span>
+          <span class="pill">Governança</span>
+        </div>
+        <div class="kbd">hover</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="backdrop" id="backdrop" role="dialog" aria-modal="true" aria-label="Vídeo de demonstração">
+    <div class="modal" id="modal">
+      <header>
+        <div class="left">
+          <div class="t" id="mTitle">Título</div>
+          <div class="d" id="mDesc">Descrição</div>
+        </div>
+        <button class="close" id="btnClose" type="button" aria-label="Fechar vídeo">Fechar ✕</button>
+      </header>
+      <div class="player">
+        <video id="player" controls playsinline webkit-playsinline preload="metadata"></video>
+      </div>
+      <footer>
+        <div class="mini">
+          <span id="mTags"></span>
+        </div>
+        <div class="mini">
+          <a class="link" href="#" id="openNew" target="_blank" rel="noopener">Abrir vídeo em nova aba</a>
+          <span>•</span>
+          <span>Som inicia desativado em hover</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const backdrop = document.getElementById('backdrop');
+    const modal = document.getElementById('modal');
+    const player = document.getElementById('player');
+    const mTitle = document.getElementById('mTitle');
+    const mDesc  = document.getElementById('mDesc');
+    const mTags  = document.getElementById('mTags');
+    const openNew = document.getElementById('openNew');
+    const btnClose = document.getElementById('btnClose');
+
+    const cards = Array.from(document.querySelectorAll('.card'));
+
+    let pinned = false;          // quando o usuário clica, fixa o modal aberto
+    let hideTimer = null;
+
+    function openModalFromCard(card, {autoplay=true, muted=true} = {}) {
+      const title = card.dataset.title || 'Demo';
+      const desc  = card.dataset.desc || '';
+      const src   = card.dataset.src  || '';
+      const tags  = (card.dataset.tags || '').split(',').map(s => s.trim()).filter(Boolean);
+
+      mTitle.textContent = title;
+      mDesc.textContent  = desc;
+      mTags.textContent  = tags.length ? ('Tags: ' + tags.join(' • ')) : '';
+
+      // Atualiza player (mobile-friendly)
+      player.pause();
+      player.currentTime = 0;
+      player.removeAttribute('src');
+      player.load();
+
+      player.src = src;
+      openNew.href = src;
+
+      // iOS/Safari: força playback inline
+      player.setAttribute('playsinline', '');
+      player.setAttribute('webkit-playsinline', '');
+      player.playsInline = true;
+
+      // Hover precisa ser mudo para autoplay funcionar na maioria dos browsers
+      player.muted = !!muted;
+
+      backdrop.classList.add('show');
+
+      // iOS/Safari: ajuda a carregar metadata antes do play
+      player.load();
+
+      if (autoplay) {
+        const p = player.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(() => { /* se bloquear, controles ficam visíveis */ });
         }
-        
-        // Load saved theme
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            const themeIcon = document.getElementById('theme-icon');
-            
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            themeIcon.textContent = savedTheme === 'light' ? '🌙 Dark' : '☀️ Light';
-        });
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // RENDER CASES
-        // ═══════════════════════════════════════════════════════════════════
-        
-        function renderCases() {
-            const casesGrid = document.getElementById('casesGrid');
-            
-            cases.forEach((caseItem, index) => {
-                const statusClass = `status-${caseItem.status}`;
-                const statusText = {
-                    production: 'Produção',
-                    pilot: 'Piloto',
-                    scalable: 'Escalável'
-                }[caseItem.status];
-                
-                const card = document.createElement('div');
-                card.className = 'case-card';
-                card.onclick = () => openCaseModal(index);
-                
-                card.innerHTML = `
-                    <span class="case-status ${statusClass}">${statusText}</span>
-                    <h3>${caseItem.title}</h3>
-                    <p>${caseItem.context}</p>
-                    <div class="case-impact">${caseItem.impact}</div>
-                `;
-                
-                casesGrid.appendChild(card);
-            });
+      }
+    }
+
+    function closeModal() {
+      pinned = false;
+      backdrop.classList.remove('show');
+      player.pause();
+      player.currentTime = 0;
+    }
+
+    function scheduleHide() {
+      if (pinned) return;
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => closeModal(), 140);
+    }
+
+    function cancelHide() {
+      clearTimeout(hideTimer);
+    }
+
+    // Hover abre (não fixa)
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        pinned = false;
+        cancelHide();
+        openModalFromCard(card, {autoplay:true, muted:true});
+      });
+
+      card.addEventListener('mouseleave', () => {
+        scheduleHide();
+      });
+
+      // Click fixa (e habilita som)
+      card.addEventListener('click', () => {
+        pinned = true;
+        openModalFromCard(card, {autoplay:true, muted:false});
+        player.muted = false;
+      });
+
+      // Teclado: Enter/Space fixa
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          pinned = true;
+          openModalFromCard(card, {autoplay:true, muted:false});
+          player.muted = false;
         }
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // VIDEO MODAL FUNCTIONS
-        // ═══════════════════════════════════════════════════════════════════
-        
-        function openVideoModal(videoKey) {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('videoPlayer');
-            const videoTitle = document.getElementById('videoTitle');
-            const soundNotice = document.getElementById('soundNotice');
-            const video = videos[videoKey];
-            
-            if (!video) return;
-            
-            // Set title and video source
-            videoTitle.textContent = video.title;
-            videoPlayer.src = video.src;
-            
-            // Show modal
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Try to play with sound first
-            videoPlayer.muted = false;
-            const playPromise = videoPlayer.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Autoplay with sound succeeded
-                    soundNotice.classList.remove('show');
-                }).catch(error => {
-                    // Autoplay with sound blocked, try muted
-                    videoPlayer.muted = true;
-                    videoPlayer.play().then(() => {
-                        // Show "enable sound" notice
-                        soundNotice.classList.add('show');
-                        
-                        // Auto-hide after 5 seconds
-                        setTimeout(() => {
-                            soundNotice.classList.remove('show');
-                        }, 5000);
-                    }).catch(err => {
-                        console.log('Autoplay prevented:', err);
-                    });
-                });
-            }
-        }
-        
-        function enableSound() {
-            const videoPlayer = document.getElementById('videoPlayer');
-            const soundNotice = document.getElementById('soundNotice');
-            
-            if (videoPlayer.muted) {
-                videoPlayer.muted = false;
-                soundNotice.classList.remove('show');
-            }
-        }
-        
-        function closeVideoModal(event) {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('videoPlayer');
-            const soundNotice = document.getElementById('soundNotice');
-            
-            if (!event || event.target === modal || event.target.classList.contains('video-close')) {
-                // Hide sound notice
-                soundNotice.classList.remove('show');
-                
-                // Pause and reset video
-                videoPlayer.pause();
-                videoPlayer.currentTime = 0;
-                videoPlayer.src = '';
-                
-                // Hide modal
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-        
-        // Close video modal with ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const videoModal = document.getElementById('videoModal');
-                if (videoModal.classList.contains('active')) {
-                    closeVideoModal();
-                }
-            }
-        });
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // CASE MODAL FUNCTIONS
-        // ═══════════════════════════════════════════════════════════════════
-        
-        function openCaseModal(index) {
-            const caseItem = cases[index];
-            const modal = document.getElementById('caseModal');
-            const modalBody = document.getElementById('modalBody');
-            
-            const statusClass = `status-${caseItem.status}`;
-            const statusText = {
-                production: 'Produção',
-                pilot: 'Piloto',
-                scalable: 'Escalável'
-            }[caseItem.status];
-            
-            modalBody.innerHTML = `
-                <span class="case-status ${statusClass}">${statusText}</span>
-                <h2>${caseItem.title}</h2>
-                
-                <h3>Contexto</h3>
-                <p>${caseItem.solution.context}</p>
-                
-                <h3>Solução de IA</h3>
-                <ul>
-                    ${caseItem.solution.architecture.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-                
-                <h3>Governança & Controles</h3>
-                <ul>
-                    ${caseItem.solution.governance.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-                
-                <h3>Resultado</h3>
-                <ul>
-                    ${caseItem.solution.results.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-            `;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeCaseModal(event) {
-            const modal = document.getElementById('caseModal');
-            
-            if (!event || event.target === modal || event.target.classList.contains('modal-close')) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-        
-        // Close case modal with ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const caseModal = document.getElementById('caseModal');
-                if (caseModal.style.display === 'block') {
-                    closeCaseModal();
-                }
-            }
-        });
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // FORM HANDLING
-        // ═══════════════════════════════════════════════════════════════════
-        
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const successMessage = document.getElementById('successMessage');
-            const form = document.getElementById('contactForm');
-            
-            successMessage.style.display = 'block';
-            form.reset();
-            
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 5000);
-        }
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // SMOOTH SCROLL
-        // ═══════════════════════════════════════════════════════════════════
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // INITIALIZE
-        // ═══════════════════════════════════════════════════════════════════
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            renderCases();
-        });
-    </script>
+      });
+    });
+
+    // Modal não fecha se mouse estiver em cima
+    modal.addEventListener('mouseenter', cancelHide);
+    modal.addEventListener('mouseleave', scheduleHide);
+
+    // Clique fora fecha (se não estiver pinned, fecha; se pinned, também fecha para ser previsível)
+    backdrop.addEventListener('mousedown', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    btnClose.addEventListener('click', closeModal);
+
+    // Esc fecha
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && backdrop.classList.contains('show')) closeModal();
+    });
+  </script>
 </body>
 </html>
