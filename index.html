@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Augusto Aragão Tarelow | AI Engineer</title>
+    <meta name="description" content="Luis Augusto Aragão - AI Engineer especializado em sistemas aplicados de IA em produção">
+    <title>Luis Augusto Aragão | AI Engineer - Applied AI Systems</title>
     <style>
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         /* RESET & VARIABLES */
@@ -114,14 +115,14 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(10, 14, 20, 0.8);
+            background: rgba(10, 14, 20, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
         
         [data-theme="light"] header {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
         }
         
         nav {
@@ -529,6 +530,24 @@
             color: var(--text-secondary);
             line-height: 1.6;
             font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .demo-tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--accent-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(14, 165, 233, 0.2);
         }
         
         .play-indicator {
@@ -557,7 +576,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.92);
+            background: rgba(0, 0, 0, 0.94);
             z-index: 3000;
             overflow-y: auto;
             padding: 2rem;
@@ -638,26 +657,33 @@
             bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(14, 165, 233, 0.95);
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 0.875rem 1.75rem;
             border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 500;
+            font-size: 0.9375rem;
+            font-weight: 600;
             display: none;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             z-index: 10;
             animation: fadeIn 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         .sound-notice.show {
             display: flex;
         }
         
+        .sound-notice:hover {
+            background: rgba(14, 165, 233, 1);
+            transform: translateX(-50%) scale(1.05);
+        }
+        
         .sound-notice::before {
             content: '🔇';
-            font-size: 1.125rem;
+            font-size: 1.25rem;
         }
         
         @keyframes slideUp {
@@ -671,6 +697,11 @@
             }
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         /* CASE MODAL */
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -682,16 +713,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
             overflow-y: auto;
             padding: 2rem;
             animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         
         .modal-content {
@@ -939,7 +965,7 @@
             }
             
             .video-wrapper {
-                padding-bottom: 75%; /* Adjust for mobile */
+                padding-bottom: 75%;
             }
         }
         
@@ -955,7 +981,7 @@
                 text-shadow: none !important;
             }
             
-            header, .theme-toggle, .cta-buttons, .modal, .video-modal {
+            header, .theme-toggle, .cta-buttons, .modal, .video-modal, .play-indicator {
                 display: none !important;
             }
             
@@ -985,8 +1011,8 @@
     
     <header>
         <nav>
-            <div class="logo">Luis Aragão Tarelow</div>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <div class="logo">Luis Augusto Aragão</div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
                 <span id="theme-icon">☀️ Light</span>
             </button>
         </nav>
@@ -999,9 +1025,9 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Luis Augusto Aragão Tarelow</h1>
-                <p class="hero-title">AI Engineer | Applied AI Systems | Multimodal & Voice AI</p>
-                <p class="hero-subtitle">Desenho e implemento sistemas de IA confiáveis para decisões críticas em corporate banking, incluindo processamento multimodal e Voice AI em ligações telefônicas.</p>
+                <h1>Luis Augusto Aragão</h1>
+                <p class="hero-title">AI Engineer | Applied AI Systems | Finance, Risk & Decision-Making</p>
+                <p class="hero-subtitle">Desenho e implemento sistemas de IA confiáveis para decisões críticas em escala.</p>
                 
                 <div class="impact-cards">
                     <div class="impact-card">
@@ -1009,18 +1035,18 @@
                         <p>Orquestração inteligente de agentes especializados em produção</p>
                     </div>
                     <div class="impact-card">
-                        <h3>IA Multimodal & Voice</h3>
-                        <p>Processamento de PDF, áudio, texto, WhatsApp e URA telefônica inteligente</p>
+                        <h3>IA Multimodal</h3>
+                        <p>Processamento de PDF, áudio, texto e WhatsApp</p>
                     </div>
                     <div class="impact-card">
                         <h3>Governança & Controle</h3>
-                        <p>Anti-alucinação, auditabilidade e segurança em ambientes críticos</p>
+                        <p>Anti-alucinação, auditabilidade e segurança</p>
                     </div>
                 </div>
                 
                 <div class="cta-buttons">
                     <a href="#cases" class="btn btn-primary">Ver Casos Reais</a>
-                    <a href="#demos" class="btn btn-secondary">Demonstrações em Vídeo</a>
+                    <a href="#contact" class="btn btn-secondary">Contato Executivo</a>
                 </div>
             </div>
         </div>
@@ -1038,9 +1064,7 @@
             <div class="about-content">
                 <p>Atuo como AI Engineer aplicado, construindo sistemas de inteligência artificial que operam em ambientes de alta responsabilidade onde decisões incorretas geram impacto financeiro e operacional significativo. Minha experiência está concentrada no mercado financeiro, especialmente em corporate banking, onde a precisão e a conformidade são requisitos inegociáveis.</p>
                 
-                <p>Meu foco está na arquitetura de sistemas de IA multimodal e conversacional, incluindo Voice AI para ligações telefônicas (URA inteligente), que combinam modelos de linguagem com regras determinísticas, garantindo confiabilidade, auditabilidade e governança em operações bancárias críticas. Trabalho com IA aplicada a crédito corporativo, análise de risco, tesouraria, gestão de portfólio e processos de relacionamento com grandes clientes, onde cada decisão impacta diretamente os resultados financeiros e a exposição ao risco da instituição.</p>
-                
-                <p>A experiência que trago é a capacidade de traduzir necessidades complexas do mercado financeiro em arquiteturas técnicas robustas, onde controle regulatório, observabilidade de decisões e valor mensurável são requisitos não negociáveis, não features opcionais. Compreendo profundamente os desafios de compliance, gestão de risco e eficiência operacional que definem o sucesso em corporate banking.</p>
+                <p>Meu foco está na arquitetura de sistemas de IA que combinam modelos de linguagem com regras determinísticas, garantindo confiabilidade, auditabilidade e governança em operações bancárias críticas. Trabalho com IA aplicada a crédito corporativo, análise de risco, tesouraria, gestão de portfólio e processos de relacionamento com grandes clientes, onde cada decisão impacta diretamente os resultados financeiros e a exposição ao risco da instituição. Compreendo profundamente os desafios de compliance, gestão de risco e eficiência operacional que definem o sucesso em corporate banking.</p>
             </div>
         </div>
     </section>
@@ -1058,11 +1082,11 @@
             <div class="skills-grid">
                 <span class="skill-tag">AI Systems Architecture</span>
                 <span class="skill-tag">Multi-Agent Orchestration</span>
-                <span class="skill-tag">Voice AI & Telephony</span>
                 <span class="skill-tag">RAG & Knowledge-based AI</span>
                 <span class="skill-tag">Python (Production)</span>
                 <span class="skill-tag">LLMs & Prompt Governance</span>
                 <span class="skill-tag">Multimodal AI</span>
+                <span class="skill-tag">Voice AI (Real-time)</span>
                 <span class="skill-tag">APIs & Cloud Deployment</span>
                 <span class="skill-tag">Data Security & Compliance</span>
                 <span class="skill-tag">Observability & Cost Control</span>
@@ -1078,7 +1102,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Casos Reais de IA</h2>
-                <p>Sistemas aplicados a problemas críticos de corporate banking e mercado financeiro</p>
+                <p>Sistemas aplicados a problemas críticos de corporate banking</p>
             </div>
             <div class="cases-grid" id="casesGrid"></div>
         </div>
@@ -1099,6 +1123,11 @@
                     <span class="demo-icon">💹</span>
                     <h3>Tesouraria — Terminal</h3>
                     <p>Sistema de suporte a decisões financeiras via interface de terminal. Análise de cenários, simulações e recomendações baseadas em dados de mercado em tempo real.</p>
+                    <div class="demo-tags">
+                        <span class="demo-tag">Cloud</span>
+                        <span class="demo-tag">Decision Support</span>
+                        <span class="demo-tag">Governança</span>
+                    </div>
                     <div class="play-indicator">Assistir demonstração</div>
                 </div>
                 
@@ -1106,6 +1135,11 @@
                     <span class="demo-icon">🔍</span>
                     <h3>Prospecção — Chat Q&A</h3>
                     <p>Sistema RAG para consulta confiável a base de conhecimento proprietária. Respostas precisas com citação de fonte, sem extrapolação ou alucinação.</p>
+                    <div class="demo-tags">
+                        <span class="demo-tag">RAG</span>
+                        <span class="demo-tag">Knowledge Base</span>
+                        <span class="demo-tag">Governança</span>
+                    </div>
                     <div class="play-indicator">Assistir demonstração</div>
                 </div>
                 
@@ -1113,6 +1147,11 @@
                     <span class="demo-icon">💬</span>
                     <h3>WhatsApp — Multi-agent</h3>
                     <p>Orquestração multi-agent via WhatsApp para análise de crédito. Processamento multimodal com governança e regras não negociáveis.</p>
+                    <div class="demo-tags">
+                        <span class="demo-tag">Multi-agent</span>
+                        <span class="demo-tag">Multimodal</span>
+                        <span class="demo-tag">WhatsApp</span>
+                    </div>
                     <div class="play-indicator">Assistir demonstração</div>
                 </div>
                 
@@ -1120,6 +1159,11 @@
                     <span class="demo-icon">📞</span>
                     <h3>Voice AI — URA Inteligente</h3>
                     <p>Sistema de URA inteligente para atendimento telefônico. Conversação natural, compreensão de contexto e resolução de solicitações complexas via voz.</p>
+                    <div class="demo-tags">
+                        <span class="demo-tag">Voice AI</span>
+                        <span class="demo-tag">Real-time</span>
+                        <span class="demo-tag">Telephony</span>
+                    </div>
                     <div class="play-indicator">Assistir demonstração</div>
                 </div>
             </div>
@@ -1218,7 +1262,7 @@
     
     <footer>
         <div class="container">
-            <p>&copy; 2025 Luis Augusto Aragão Tarelow | AI Engineer - Applied AI Systems & Voice AI</p>
+            <p>&copy; 2025 Luis Augusto Aragão | AI Engineer - Applied AI Systems</p>
         </div>
     </footer>
     
@@ -1234,8 +1278,8 @@
             </div>
             <div class="video-wrapper">
                 <video id="videoPlayer" controls playsinline preload="metadata"></video>
-                <div class="sound-notice" id="soundNotice">
-                    Clique no vídeo para ativar o som
+                <div class="sound-notice" id="soundNotice" onclick="enableSound()">
+                    Clique aqui para ativar o som
                 </div>
             </div>
         </div>
@@ -1288,35 +1332,6 @@
                         "Rastreabilidade completa em decisões para compliance",
                         "Proteção rigorosa de informações sensíveis em operação",
                         "Interface acessível via WhatsApp ampliou adesão de analistas"
-                    ]
-                }
-            },
-            {
-                title: "Voice AI — URA Inteligente para Banking",
-                status: "production",
-                context: "Necessidade de modernizar atendimento telefônico com IA conversacional capaz de resolver solicitações complexas via voz.",
-                impact: "Atendimento telefônico inteligente com compreensão natural",
-                solution: {
-                    context: "Atendimento telefônico tradicional via URA (Unidade de Resposta Audível) é frustrante para clientes e custoso para operação. A solução precisava oferecer conversação natural, compreender contexto e resolver solicitações complexas mantendo segurança e compliance.",
-                    architecture: [
-                        "Integração com plataforma de telefonia (SIP/WebRTC) para recepção de chamadas",
-                        "Speech-to-Text (STT) em tempo real para conversão de fala em texto",
-                        "Motor de IA conversacional com compreensão de intenção e extração de entidades",
-                        "Text-to-Speech (TTS) com voz natural e personalizada",
-                        "Orquestração de fluxos complexos com transferência inteligente para humanos"
-                    ],
-                    governance: [
-                        "Autenticação de usuário via voz (biometria vocal) e validação de dados pessoais",
-                        "Logs completos de chamadas e transcrições para auditoria",
-                        "Detecção de situações de risco ou fraude com escalação automática",
-                        "Compliance com LGPD: gravações com consentimento e armazenamento seguro",
-                        "Fallback inteligente para atendimento humano quando confiança é baixa"
-                    ],
-                    results: [
-                        "Resolução de solicitações complexas sem necessidade de operador humano",
-                        "Experiência do cliente significativamente melhorada",
-                        "Custo operacional de atendimento reduzido",
-                        "Disponibilidade de atendimento expandida para fora do horário comercial"
                     ]
                 }
             },
@@ -1435,29 +1450,58 @@
                         "Vídeos produzidos em piloto com expansão planejada"
                     ]
                 }
+            },
+            {
+                title: "Voice AI — URA Inteligente para Banking",
+                status: "production",
+                context: "Necessidade de modernizar atendimento telefônico com IA conversacional capaz de resolver solicitações complexas via voz.",
+                impact: "Atendimento telefônico inteligente com compreensão natural",
+                solution: {
+                    context: "Atendimento telefônico tradicional via URA (Unidade de Resposta Audível) é frustrante para clientes e custoso para operação. A solução precisava oferecer conversação natural, compreender contexto e resolver solicitações complexas mantendo segurança e compliance.",
+                    architecture: [
+                        "Integração com plataforma de telefonia (SIP/WebRTC) para recepção de chamadas",
+                        "Speech-to-Text (STT) em tempo real para conversão de fala em texto",
+                        "Motor de IA conversacional com compreensão de intenção e extração de entidades",
+                        "Text-to-Speech (TTS) com voz natural e personalizada",
+                        "Orquestração de fluxos complexos com transferência inteligente para humanos"
+                    ],
+                    governance: [
+                        "Autenticação de usuário via voz (biometria vocal) e validação de dados pessoais",
+                        "Logs completos de chamadas e transcrições para auditoria",
+                        "Detecção de situações de risco ou fraude com escalação automática",
+                        "Compliance com LGPD: gravações com consentimento e armazenamento seguro",
+                        "Fallback inteligente para atendimento humano quando confiança é baixa"
+                    ],
+                    results: [
+                        "Resolução de solicitações complexas sem necessidade de operador humano",
+                        "Experiência do cliente significativamente melhorada",
+                        "Custo operacional de atendimento reduzido",
+                        "Disponibilidade de atendimento expandida para fora do horário comercial"
+                    ]
+                }
             }
         ];
         
         // ═══════════════════════════════════════════════════════════════════
-        // VIDEO CONFIGURATION
+        // VIDEO CONFIGURATION (Google Drive Direct Links)
         // ═══════════════════════════════════════════════════════════════════
         
         const videos = {
             tesouraria: {
                 title: "Tesouraria — Terminal de Decisão Financeira",
-                src: "assets/tesouraria.mp4"
+                src: "https://drive.google.com/uc?export=download&id=1pUfAlZF_gIAxmU6zJYXiFPVaxKn_2EZ5"
             },
             prospeccao: {
                 title: "Prospecção — Sistema RAG Q&A",
-                src: "assets/prospeccao.mp4"
+                src: "https://drive.google.com/uc?export=download&id=1Nv1uhBHtzAV4we5oGDzVEYoOiWWZjcHt"
             },
             whatsapp: {
                 title: "WhatsApp — Sistema Multi-Agent",
-                src: "assets/whats.mp4"
+                src: "https://drive.google.com/uc?export=download&id=1c7SItaqFkiABscib2H-ax92gZrHS9ptU"
             },
             voice: {
                 title: "Voice AI — URA Inteligente (Ligação Telefônica)",
-                src: "assets/ura_voice_ai.mp4"
+                src: "https://drive.google.com/uc?export=download&id=1uZgGPU8EiIc8ko4QmNV6J-FngUh-weL0"
             }
         };
         
@@ -1537,30 +1581,40 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Start video muted with autoplay
-            videoPlayer.muted = true;
-            videoPlayer.play().then(() => {
-                // Show sound notice
-                soundNotice.classList.add('show');
-                
-                // Hide notice after 4 seconds
-                setTimeout(() => {
+            // Try to play with sound first
+            videoPlayer.muted = false;
+            const playPromise = videoPlayer.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Autoplay with sound succeeded
                     soundNotice.classList.remove('show');
-                }, 4000);
-                
-                // Unmute when user clicks on video
-                videoPlayer.addEventListener('click', function unmute() {
-                    if (videoPlayer.muted) {
-                        videoPlayer.muted = false;
-                        soundNotice.classList.remove('show');
-                    }
-                    videoPlayer.removeEventListener('click', unmute);
+                }).catch(error => {
+                    // Autoplay with sound blocked, try muted
+                    videoPlayer.muted = true;
+                    videoPlayer.play().then(() => {
+                        // Show "enable sound" notice
+                        soundNotice.classList.add('show');
+                        
+                        // Auto-hide after 5 seconds
+                        setTimeout(() => {
+                            soundNotice.classList.remove('show');
+                        }, 5000);
+                    }).catch(err => {
+                        console.log('Autoplay prevented:', err);
+                    });
                 });
-            }).catch(err => {
-                console.log('Autoplay prevented:', err);
-                // If autoplay fails, unmute by default
+            }
+        }
+        
+        function enableSound() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            const soundNotice = document.getElementById('soundNotice');
+            
+            if (videoPlayer.muted) {
                 videoPlayer.muted = false;
-            });
+                soundNotice.classList.remove('show');
+            }
         }
         
         function closeVideoModal(event) {
