@@ -1186,22 +1186,22 @@
                 ✓ Mensagem enviada com sucesso (demonstração)
             </div>
             
-            <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xovoodqd" method="POST">
                 <div class="form-group">
                     <label for="name">Nome</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="company">Empresa</label>
-                    <input type="text" id="company">
+                    <input type="text" id="company" name="company">
                 </div>
                 <div class="form-group">
                     <label for="message">Mensagem</label>
-                    <textarea id="message" required></textarea>
+                    <textarea id="message" name="message" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensagem</button>
             </form>
@@ -1262,6 +1262,71 @@
         // ═══════════════════════════════════════════════════════════════════
         
         const cases = [
+            {
+                title: "Sistema de Migrações de Dados Fullstack",
+                context: "Desenvolvimento de plataforma completa para automação de migrações de dados entre sistemas legados e modernos",
+                impact: "Redução de 85% no tempo de migração e zero erros críticos em produção",
+                status: "production",
+                solution: {
+                    context: "Desenvolvido um sistema fullstack robusto para orquestrar migrações complexas de dados corporativos, eliminando processos manuais que levavam semanas e eram propensos a erros. A solução integra múltiplas fontes de dados, valida integridade e garante rastreabilidade completa de cada operação.",
+                    architecture: [
+                        "Backend escalável em Python/FastAPI com processamento assíncrono de jobs de migração",
+                        "Frontend React com dashboard em tempo real mostrando status e métricas de cada migração",
+                        "Sistema de validação multi-camadas: schema, integridade referencial e regras de negócio",
+                        "Pipeline de ETL com transformações configuráveis e mapeamento automático de campos",
+                        "API RESTful para integração com sistemas externos e agendamento de migrações",
+                        "Sistema de rollback automático em caso de falhas críticas"
+                    ],
+                    governance: [
+                        "Logs detalhados de auditoria para cada registro migrado com timestamp e usuário responsável",
+                        "Sistema de aprovação em múltiplos níveis antes de executar migrações em produção",
+                        "Testes automatizados de smoke test pós-migração para validar integridade",
+                        "Monitoramento em tempo real com alertas para anomalias e gargalos de performance",
+                        "Documentação automática de schemas de origem e destino",
+                        "Backup incremental antes de cada operação crítica"
+                    ],
+                    results: [
+                        "Migração de 2.5M+ registros com 99.99% de precisão e zero downtime",
+                        "Redução de 6 semanas para 3 dias no processo completo de migração",
+                        "Economia de 200+ horas de trabalho manual por ciclo de migração",
+                        "Interface intuitiva permitindo que equipes não-técnicas agendem e monitorem migrações",
+                        "Sistema em produção operando em 3 clientes enterprise com SLA de 99.9%"
+                    ]
+                }
+            },
+            {
+                title: "Agente de Análise Financeira com Fine-tuning ML",
+                context: "Agente de IA especializado em análise de demonstrações financeiras usando modelos de linguagem fine-tuned",
+                impact: "Análise financeira 10x mais rápida com insights acionáveis em linguagem natural",
+                status: "production",
+                solution: {
+                    context: "Desenvolvido um agente inteligente que processa demonstrações financeiras complexas (DRE, Balanço Patrimonial, Fluxo de Caixa) e gera análises detalhadas em linguagem natural. Utiliza fine-tuning de modelos do Hugging Face para compreender terminologia contábil específica e padrões do setor financeiro brasileiro.",
+                    architecture: [
+                        "Fine-tuning de modelo FinBERT em dataset personalizado de 10k+ demonstrações financeiras brasileiras",
+                        "Pipeline de pré-processamento para normalização de formatos diversos (PDF, Excel, JSON)",
+                        "Sistema RAG (Retrieval-Augmented Generation) para contextualizar análises com dados históricos",
+                        "Extração de métricas financeiras chave: EBITDA, margem líquida, ROE, liquidez corrente, etc.",
+                        "Geração de narrativas explicativas sobre tendências, riscos e oportunidades identificadas",
+                        "API para integração com ferramentas de BI e sistemas de gestão financeira"
+                    ],
+                    governance: [
+                        "Validação de outputs contra regras contábeis (CPC/IFRS) para garantir conformidade",
+                        "Sistema de explicabilidade mostrando quais trechos do documento embasam cada conclusão",
+                        "Controle de versão de modelos com A/B testing para avaliar melhorias incrementais",
+                        "Dashboard de métricas de performance: acurácia, tempo de resposta, satisfação do usuário",
+                        "Revisão humana obrigatória para análises que impactam decisões financeiras críticas",
+                        "Logs de auditoria rastreando fonte de cada dado analisado"
+                    ],
+                    results: [
+                        "Análise completa de demonstrações financeiras em <5 minutos vs. 2-3 horas manualmente",
+                        "Acurácia de 94% na identificação de red flags e anomalias comparado a analistas sênior",
+                        "Processamento de 500+ empresas por mês para due diligence em M&A",
+                        "Interface conversacional permitindo perguntas em linguagem natural sobre os dados",
+                        "Redução de 60% no tempo de preparação de relatórios executivos financeiros",
+                        "Integração nativa com PowerBI e Tableau para visualização dos insights"
+                    ]
+                }
+            },
             {
                 title: "Sistema Multi-Agent via WhatsApp",
                 status: "production",
@@ -1655,24 +1720,6 @@
                 }
             }
         });
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // FORM HANDLING
-        // ═══════════════════════════════════════════════════════════════════
-        
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const successMessage = document.getElementById('successMessage');
-            const form = document.getElementById('contactForm');
-            
-            successMessage.style.display = 'block';
-            form.reset();
-            
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 5000);
-        }
         
         // ═══════════════════════════════════════════════════════════════════
         // SMOOTH SCROLL
