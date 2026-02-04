@@ -468,210 +468,6 @@
         }
         
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* VIDEO DEMONSTRATIONS SECTION */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .demos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .demo-card {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .demo-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .demo-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .demo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px var(--shadow-md);
-            border-color: var(--accent-primary);
-        }
-        
-        .demo-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-        
-        .demo-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-        }
-        
-        .demo-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-        
-        .play-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            color: var(--accent-primary);
-            font-weight: 600;
-            font-size: 0.9375rem;
-        }
-        
-        .play-indicator::before {
-            content: '▶';
-            font-size: 0.875rem;
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* VIDEO MODAL */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        
-        .video-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 3000;
-            overflow-y: auto;
-            padding: 2rem;
-            animation: fadeIn 0.3s ease;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .video-modal.active {
-            display: flex;
-        }
-        
-        .video-container {
-            position: relative;
-            max-width: 1200px;
-            width: 100%;
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            overflow: hidden;
-            animation: slideUp 0.4s ease;
-            border: 1px solid var(--border-color);
-        }
-        
-        .video-header {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .video-header h3 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-        }
-        
-        .video-close {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.2s ease;
-        }
-        
-        .video-close:hover {
-            background: var(--accent-primary);
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            background: #000;
-        }
-        
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            outline: none;
-        }
-        
-        .sound-notice {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            z-index: 10;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .sound-notice.show {
-            display: flex;
-        }
-        
-        .sound-notice::before {
-            content: '🔇';
-            font-size: 1.125rem;
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         /* CASE MODAL */
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         
@@ -703,6 +499,17 @@
             position: relative;
             animation: slideUp 0.4s ease;
             border: 1px solid var(--border-color);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .modal-close {
@@ -919,8 +726,7 @@
                 grid-template-columns: 1fr;
             }
             
-            .cases-grid,
-            .demos-grid {
+            .cases-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -937,10 +743,6 @@
                 width: 100%;
                 text-align: center;
             }
-            
-            .video-wrapper {
-                padding-bottom: 75%; /* Adjust for mobile */
-            }
         }
         
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -955,7 +757,7 @@
                 text-shadow: none !important;
             }
             
-            header, .theme-toggle, .cta-buttons, .modal, .video-modal {
+            header, .theme-toggle, .cta-buttons, .modal {
                 display: none !important;
             }
             
@@ -963,7 +765,7 @@
                 page-break-inside: avoid;
             }
             
-            .case-card, .principle-card, .demo-card {
+            .case-card, .principle-card {
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid;
             }
@@ -1020,7 +822,7 @@
                 
                 <div class="cta-buttons">
                     <a href="#cases" class="btn btn-primary">Ver Casos Reais</a>
-                    <a href="#demos" class="btn btn-secondary">Demonstrações em Vídeo</a>
+                    <a href="#contact" class="btn btn-secondary">Entrar em Contato</a>
                 </div>
             </div>
         </div>
@@ -1081,48 +883,6 @@
                 <p>Sistemas aplicados a problemas críticos de corporate banking e mercado financeiro</p>
             </div>
             <div class="cases-grid" id="casesGrid"></div>
-        </div>
-    </section>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- VIDEO DEMONSTRATIONS SECTION -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <section id="demos">
-        <div class="container">
-            <div class="section-header">
-                <h2>Demonstrações em Vídeo</h2>
-                <p>Sistemas em Execução</p>
-            </div>
-            <div class="demos-grid">
-                <div class="demo-card" onclick="openVideoModal('tesouraria')">
-                    <span class="demo-icon">💹</span>
-                    <h3>Tesouraria — Terminal</h3>
-                    <p>Sistema de suporte a decisões financeiras via interface de terminal. Análise de cenários, simulações e recomendações baseadas em dados de mercado em tempo real.</p>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-                
-                <div class="demo-card" onclick="openVideoModal('prospeccao')">
-                    <span class="demo-icon">🔍</span>
-                    <h3>Prospecção — Chat Q&A</h3>
-                    <p>Sistema RAG para consulta confiável a base de conhecimento proprietária. Respostas precisas com citação de fonte, sem extrapolação ou alucinação.</p>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-                
-                <div class="demo-card" onclick="openVideoModal('whatsapp')">
-                    <span class="demo-icon">💬</span>
-                    <h3>WhatsApp — Multi-agent</h3>
-                    <p>Orquestração multi-agent via WhatsApp para análise de crédito. Processamento multimodal com governança e regras não negociáveis.</p>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-                
-                <div class="demo-card" onclick="openVideoModal('voice')">
-                    <span class="demo-icon">📞</span>
-                    <h3>Voice AI — URA Inteligente</h3>
-                    <p>Sistema de URA inteligente para atendimento telefônico. Conversação natural, compreensão de contexto e resolução de solicitações complexas via voz.</p>
-                    <div class="play-indicator">Assistir demonstração</div>
-                </div>
-            </div>
         </div>
     </section>
     
@@ -1221,25 +981,6 @@
             <p>&copy; 2025 Luis Augusto Aragão Tarelow | AI Engineer - Applied AI Systems & Voice AI</p>
         </div>
     </footer>
-    
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- VIDEO MODAL -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    
-    <div class="video-modal" id="videoModal" onclick="closeVideoModal(event)">
-        <div class="video-container" onclick="event.stopPropagation()">
-            <div class="video-header">
-                <h3 id="videoTitle"></h3>
-                <button class="video-close" onclick="closeVideoModal()" aria-label="Fechar vídeo">&times;</button>
-            </div>
-            <div class="video-wrapper">
-                <video id="videoPlayer" controls playsinline webkit-playsinline preload="metadata" controlslist="nodownload noplaybackrate" disablepictureinpicture></video>
-                <div class="sound-notice" id="soundNotice">
-                    Clique no vídeo para ativar o som
-                </div>
-            </div>
-        </div>
-    </div>
     
     <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
     <!-- CASE MODAL -->
@@ -1504,29 +1245,6 @@
         ];
         
         // ═══════════════════════════════════════════════════════════════════
-        // VIDEO CONFIGURATION
-        // ═══════════════════════════════════════════════════════════════════
-        
-        const videos = {
-            tesouraria: {
-                title: "Tesouraria — Terminal de Decisão Financeira",
-                src: "assets/tesouraria.mp4"
-            },
-            prospeccao: {
-                title: "Prospecção — Sistema RAG Q&A",
-                src: "assets/prospeccao.mp4"
-            },
-            whatsapp: {
-                title: "WhatsApp — Sistema Multi-Agent",
-                src: "assets/whats.mp4"
-            },
-            voice: {
-                title: "Voice AI — URA Inteligente (Ligação Telefônica)",
-                src: "assets/ura_voice_ai.mp4"
-            }
-        };
-        
-        // ═══════════════════════════════════════════════════════════════════
         // THEME TOGGLE
         // ═══════════════════════════════════════════════════════════════════
         
@@ -1580,84 +1298,6 @@
                 casesGrid.appendChild(card);
             });
         }
-        
-        // ═══════════════════════════════════════════════════════════════════
-        // VIDEO MODAL FUNCTIONS
-        // ═══════════════════════════════════════════════════════════════════
-        
-        function openVideoModal(videoKey) {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('videoPlayer');
-            const videoTitle = document.getElementById('videoTitle');
-            const soundNotice = document.getElementById('soundNotice');
-            const video = videos[videoKey];
-            
-            if (!video) return;
-            
-            // Set title and video source
-            videoTitle.textContent = video.title;
-            videoPlayer.src = video.src;
-            
-            // Show modal
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Start video muted with autoplay
-            videoPlayer.muted = true;
-            videoPlayer.play().then(() => {
-                // Show sound notice
-                soundNotice.classList.add('show');
-                
-                // Hide notice after 4 seconds
-                setTimeout(() => {
-                    soundNotice.classList.remove('show');
-                }, 4000);
-                
-                // Unmute when user clicks on video
-                videoPlayer.addEventListener('click', function unmute() {
-                    if (videoPlayer.muted) {
-                        videoPlayer.muted = false;
-                        soundNotice.classList.remove('show');
-                    }
-                    videoPlayer.removeEventListener('click', unmute);
-                });
-            }).catch(err => {
-                console.log('Autoplay prevented:', err);
-                // If autoplay fails, unmute by default
-                videoPlayer.muted = false;
-            });
-        }
-        
-        function closeVideoModal(event) {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('videoPlayer');
-            const soundNotice = document.getElementById('soundNotice');
-            
-            if (!event || event.target === modal || event.target.classList.contains('video-close')) {
-                // Hide sound notice
-                soundNotice.classList.remove('show');
-                
-                // Pause and reset video
-                try { videoPlayer.pause(); } catch (e) {}
-                try { videoPlayer.currentTime = 0; } catch (e) {}
-                videoPlayer.removeAttribute('src');
-                videoPlayer.load();
-                
-                // Hide modal
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-        
-        // Close video modal with ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const videoModal = document.getElementById('videoModal');
-                if (videoModal.classList.contains('active')) {
-                    closeVideoModal();
-                }
-            }
-        });
         
         // ═══════════════════════════════════════════════════════════════════
         // CASE MODAL FUNCTIONS
